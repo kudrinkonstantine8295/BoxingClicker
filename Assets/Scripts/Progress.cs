@@ -14,6 +14,14 @@ public class Progress : MonoBehaviour
 
     private float _timer;
 
+    public double CoinsPerCLick => _coinsPreClick;
+
+    private void Start()
+    {
+        UpdateCoinsText();
+        UpdatePerSecondText();
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -35,5 +43,10 @@ public class Progress : MonoBehaviour
     private void UpdateCoinsText()
     {
         _coinsText.text = _numberOfCoins.ToString();
+    }
+
+    private void UpdatePerSecondText()
+    {
+        _perSecondText.text = _coinsPerSecond.ToString();
     }
 }
