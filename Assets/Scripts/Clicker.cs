@@ -7,7 +7,7 @@ public class Clicker : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private Progress _progress;
     [SerializeField] private ClickEffect _clickEffectPrefab;
-
+    [SerializeField] private LevelManager _levelManager;
 
 
     private void Update()
@@ -25,6 +25,7 @@ public class Clicker : MonoBehaviour
 
                    ClickEffect newClickEffect= Instantiate(_clickEffectPrefab, hit.point, Quaternion.identity);
                     newClickEffect.Setup(_progress.CoinsPerCLick);
+                    _levelManager.AddClick();
                 }
             }
         }
