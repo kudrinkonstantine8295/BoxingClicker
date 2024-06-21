@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         _scaleImage.fillAmount = (float)_clicks / _clicksForLevel[_currentLevelIndex];
-        _levelText.text = "Уровень" + _currentLevelIndex + 1;
+        _levelText.text = $"Уровень {_currentLevelIndex + 1}";
     }
 
     private void IncreaseLevel()
@@ -25,10 +25,8 @@ public class LevelManager : MonoBehaviour
         _models[_currentLevelIndex].SetActive(false);
         _currentLevelIndex++;
         _models[_currentLevelIndex].SetActive(true);
-        _levelText.text = "Уровень" + _currentLevelIndex + 1;
+        _levelText.text = $"Уровень {_currentLevelIndex + 1}";
     }
-
-
 
     public void AddClick()
     {
@@ -42,7 +40,4 @@ public class LevelManager : MonoBehaviour
 
         _scaleImage.fillAmount = (float)_clicks / _clicksForLevel[_currentLevelIndex];
     }
-
-
-
 }

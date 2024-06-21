@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,6 +24,35 @@ public class ShopButton : MonoBehaviour
     [SerializeField] private TMP_Text _priceText;
     [SerializeField] private Button _button;
     [SerializeField] private Image _image;
+    [SerializeField] private Progress _progress;
+
+    private void Awake()
+    {
+        _progress.OnCoinsChanged += UpdateButton;
+    }
+
+    private void OnDisable()
+    {
+        _progress.OnCoinsChanged -= UpdateButton;  
+        _button.onClick.RemoveListener(Buy);
+    }
+
+    private void UpdateButton(double coins)
+    {
+        if (_price <= coins)
+        {
+            _button.interactable = true;
+        }
+        else
+        {
+            _button.interactable = false;
+        }
+    }
+
+    private void Start()
+    {
+        _button.onClick.AddListener(Buy);
+    }
 
     private void OnValidate()
     {
@@ -39,5 +69,17 @@ public class ShopButton : MonoBehaviour
 
         _priceText.text = Formater.Format(_price);
         _image.sprite = _sprite;
+    }
+
+    public void Buy()
+    {
+        if (_incomeOption == IncomeOption.PerClick)
+        {
+            _progress.AddCoinsPerClick(_income, _price);
+        }
+        else
+        {
+            _progress.AddCoinsPerSecond(_income, _price);
+        }
     }
 }
