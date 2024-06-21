@@ -9,6 +9,6 @@ public class ClickEffect : MonoBehaviour
 
     public void Setup(double value)
     {
-        _text.text = value.ToString();
+        _text.text = Formater.Format(value);
     }
 }

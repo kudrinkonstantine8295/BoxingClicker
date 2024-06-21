@@ -42,11 +42,11 @@ public class Progress : MonoBehaviour
 
     private void UpdateCoinsText()
     {
-        _coinsText.text = _numberOfCoins.ToString();
+        _coinsText.text = Formater.Format(_numberOfCoins);
     }
 
     private void UpdatePerSecondText()
     {
-        _perSecondText.text = _coinsPerSecond.ToString();
+        _perSecondText.text = Formater.Format(_coinsPerSecond);
     }
 }
