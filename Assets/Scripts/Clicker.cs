@@ -17,16 +17,17 @@ public class Clicker : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.GetComponent<ClickZone>())
                 {
                     _progress.AddClick();
+                    GameObject newPrefab = ObjectPoolManager.SpawnObject(_clickEffectPrefab, hit.point, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    newPrefab.TryGetComponent(out ClickEffect clickEffect);
 
-                   //ClickEffect newClickEffect= Instantiate(_clickEffectPrefab, hit.point, Quaternion.identity);
-                    ObjectPoolManager.SpawnObject(_clickEffectPrefab, hit.point, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+                    if (clickEffect != null)
+                        clickEffect.Setup(_progress.CoinsPerCLick);
 
-                    //newClickEffect.Setup(_progress.CoinsPerCLick);
                     _shaker.Shake();
                     _levelManager.AddClick();
                 }

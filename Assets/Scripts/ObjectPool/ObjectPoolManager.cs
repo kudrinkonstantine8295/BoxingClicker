@@ -42,7 +42,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         PooledObjectInfo pool = ObjectPools.Find(p => p.LookingString == objectToSpawn.name);
 
-        if (pool != null)
+        if (pool == null)
         {
             pool = new PooledObjectInfo() { LookingString = objectToSpawn.name };
             ObjectPools.Add(pool);
@@ -101,9 +101,9 @@ public class ObjectPoolManager : MonoBehaviour
     {
         string goName = obj.name.Substring(0, obj.name.Length - 7); // Removing "(Clone)" from the name of the passed on obj
 
-        PooledObjectInfo pool = ObjectPools.Find(p => p.LookingString == obj.name);
+        PooledObjectInfo pool = ObjectPools.Find(p => p.LookingString == goName);
 
-        if (pool != null)
+        if (pool == null)
         {
             Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
         }
@@ -120,7 +120,7 @@ public class ObjectPoolManager : MonoBehaviour
             case PoolType.ParticleSystem:
                 return _particleSystemsEmpty;
             case PoolType.GameObject:
-                return _particleSystemsEmpty;
+                return _gameObjectsEmpty;
             case PoolType.None:
                 return null;
             default:
