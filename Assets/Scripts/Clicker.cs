@@ -6,7 +6,7 @@ public class Clicker : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Progress _progress;
-    [SerializeField] private ClickEffect _clickEffectPrefab;
+    [SerializeField] private GameObject _clickEffectPrefab;
     [SerializeField] private LevelManager _levelManager;
     [SerializeField] private Shaker _shaker;
 
@@ -23,8 +23,10 @@ public class Clicker : MonoBehaviour
                 {
                     _progress.AddClick();
 
-                   ClickEffect newClickEffect= Instantiate(_clickEffectPrefab, hit.point, Quaternion.identity);
-                    newClickEffect.Setup(_progress.CoinsPerCLick);
+                   //ClickEffect newClickEffect= Instantiate(_clickEffectPrefab, hit.point, Quaternion.identity);
+                    ObjectPoolManager.SpawnObject(_clickEffectPrefab, hit.point, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
+
+                    //newClickEffect.Setup(_progress.CoinsPerCLick);
                     _shaker.Shake();
                     _levelManager.AddClick();
                 }
