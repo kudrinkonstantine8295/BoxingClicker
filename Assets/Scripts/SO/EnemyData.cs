@@ -9,12 +9,6 @@ public enum EnemyStatuses
     Bonus
 }
 
-public struct EnemyStatusIndex
-{
-    public EnemyStatuses Status;
-    public int Index;
-}
-
 public struct Stage
 {
     public AudioClip Clip;

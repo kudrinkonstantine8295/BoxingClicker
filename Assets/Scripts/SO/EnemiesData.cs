@@ -12,8 +12,8 @@ public class EnemiesData : ScriptableObject
 
     [field: SerializeField] public EnemyStatuses EnemyStatus { get; private set; }
 
-    public bool IsStatusIndexValid(EnemyStatusIndex enemyStatusindex)
+    public bool IsStatusIndexValid(/*EnemyStatusIndex enemyStatusindex*/ int index)
     {
-        return (enemyStatusindex.Status == EnemyStatus && EnemiesDataList[enemyStatusindex.Index] != null);
+        return (/*enemyStatusindex.Status == EnemyStatus && */EnemiesDataList[/*enemyStatusindex.Index*/ index] != null);
     }
 }

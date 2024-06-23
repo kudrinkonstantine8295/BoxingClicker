@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private EnemyManager _enemyManager;
+    private float _damage = 1f;
+    private double _money = 0f;
+
+
 
     private void Start()
     {
-       
+        
     }
+
 }

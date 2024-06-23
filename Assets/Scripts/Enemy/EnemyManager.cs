@@ -15,37 +15,49 @@ public class EnemyManager : MonoBehaviour
     private string _name;
     private GameObject _enemyBody;
 
-    public UnityEvent<EnemyData> OnEnemyDataUpdated;
+    public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
 
-    private bool TryGetCurrentEnemy(EnemiesData enemiesData, EnemyStatusIndex enemyStatusIndex)
+    private int _index = 0;
+    private int _gameCompletedTimes = 0;
+
+    private void Start()
     {
-        if (enemiesData.IsStatusIndexValid(enemyStatusIndex))
+        InitializeEnemy(_index);
+    }
+
+    private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
+    {
+        if (enemiesData.IsStatusIndexValid(index))
         {
-            _currentEnemy = enemiesData.EnemiesDataList[enemyStatusIndex.Index];
+            _currentEnemy = enemiesData.EnemiesDataList[index];
             return true;
         }
         else
             return false;
     }
 
-    public void InitializeEnemy(EnemyStatusIndex enemyStatusIndex)
+    public void InitializeEnemy(int index)
     {
         if (_enemyBody != null)
         {
             Destroy(_enemyBody);
         }
 
-        if (TryGetCurrentEnemy(_mainEnemiesData, enemyStatusIndex) || TryGetCurrentEnemy(_bonusEnemiesData, enemyStatusIndex))
-        {
-            OnEnemyDataUpdated?.Invoke(_currentEnemy);
-            _name = _currentEnemy.Name;
-        }
+        if (index < _mainEnemiesData.EnemiesDataList.Count)
+            _currentEnemy = _mainEnemiesData.EnemiesDataList[index];
+        else
+            _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count - 1)];
     }
 
     private void SwitchToNextEnemy()
     {
+        _index++;
 
+        if (_index >= _mainEnemiesData.EnemiesDataList.Count + _gameCompletedTimes)
+            _index = 0;
+
+            InitializeEnemy(_index);
     }
 
     private void UpdateHealth(int damage)
@@ -54,7 +66,7 @@ public class EnemyManager : MonoBehaviour
 
         if (_health <= 0f)
         {
-
+            SwitchToNextEnemy();
         }
     }
 
