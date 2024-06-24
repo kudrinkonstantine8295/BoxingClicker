@@ -29,6 +29,7 @@ public class ShopButton : MonoBehaviour
     private void Awake()
     {
         _progress.OnCoinsChanged += UpdateButton;
+
     }
 
     private void OnDisable()
@@ -76,6 +77,7 @@ public class ShopButton : MonoBehaviour
         if (_incomeOption == IncomeOption.PerClick)
         {
             _progress.AddCoinsPerClick(_income, _price);
+            
         }
         else
         {

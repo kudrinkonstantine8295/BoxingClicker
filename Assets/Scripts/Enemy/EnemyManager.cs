@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,21 +10,19 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemiesData _mainEnemiesData;
     [SerializeField] private EnemiesData _bonusEnemiesData;
     [SerializeField] private Transform _enemyParent;
+    [SerializeField] private PlayerStats _playerStats;
 
     private EnemyData _currentEnemy;
-    private float _health = 0f;
-    private string _name;
+    private float _currentEnemyHealth = 0f;
     private GameObject _enemyBody;
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
-
-    private int _index = 0;
-    private int _gameCompletedTimes = 0;
+    public UnityEvent<PlayerStats> OnPlayerStatsChanged;
 
     private void Start()
     {
-        InitializeEnemy(_index);
+        InitializeEnemy(_playerStats.Index);
     }
 
     private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
@@ -48,23 +47,30 @@ public class EnemyManager : MonoBehaviour
             _currentEnemy = _mainEnemiesData.EnemiesDataList[index];
         else
             _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count - 1)];
+
+        _currentEnemyHealth = _currentEnemy.Health;
+
+        OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
     }
 
     private void SwitchToNextEnemy()
     {
-        _index++;
+        _playerStats.Index++;
 
-        if (_index >= _mainEnemiesData.EnemiesDataList.Count + _gameCompletedTimes)
-            _index = 0;
+        if (_playerStats.Index >= _mainEnemiesData.EnemiesDataList.Count + _playerStats.GameCompletedTimes)
+        {
+            _playerStats.Index = 0;
+        }
 
-            InitializeEnemy(_index);
+        InitializeEnemy(_playerStats.Index);
+        OnPlayerStatsChanged?.Invoke(_playerStats);
     }
 
     private void UpdateHealth(int damage)
     {
-        _health -= damage;
+        _currentEnemyHealth -= damage;
 
-        if (_health <= 0f)
+        if (_currentEnemyHealth <= 0f)
         {
             SwitchToNextEnemy();
         }
