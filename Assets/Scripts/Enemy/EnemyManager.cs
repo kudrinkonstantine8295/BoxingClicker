@@ -19,22 +19,23 @@ public class EnemyManager : MonoBehaviour
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
     public UnityEvent<PlayerStats> OnPlayerStatsChanged;
+    public UnityEvent<float> OnCurrentEnemyHealthChanged;
 
     private void Start()
     {
         InitializeEnemy(_playerStats.Index);
     }
 
-    private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
-    {
-        if (enemiesData.IsStatusIndexValid(index))
-        {
-            _currentEnemy = enemiesData.EnemiesDataList[index];
-            return true;
-        }
-        else
-            return false;
-    }
+    //private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
+    //{
+    //    if (enemiesData.IsStatusIndexValid(index))
+    //    {
+    //        _currentEnemy = enemiesData.EnemiesDataList[index];
+    //        return true;
+    //    }
+    //    else
+    //        return false;
+    //}
 
     public void InitializeEnemy(int index)
     {
@@ -50,7 +51,9 @@ public class EnemyManager : MonoBehaviour
 
         _currentEnemyHealth = _currentEnemy.Health;
 
+
         OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
+        OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
     }
 
     private void SwitchToNextEnemy()
@@ -66,7 +69,7 @@ public class EnemyManager : MonoBehaviour
         OnPlayerStatsChanged?.Invoke(_playerStats);
     }
 
-    private void UpdateHealth(int damage)
+    public void MakeClickPunch(float damage)
     {
         _currentEnemyHealth -= damage;
 
@@ -74,6 +77,8 @@ public class EnemyManager : MonoBehaviour
         {
             SwitchToNextEnemy();
         }
+
+        OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
     }
 
 }
