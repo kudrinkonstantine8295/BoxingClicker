@@ -15,27 +15,19 @@ public class EnemyManager : MonoBehaviour
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
     private GameObject _enemyBody;
+    private int _currentStage = 0;
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
     public UnityEvent<SaveLoadData> OnPlayerStatsChanged;
     public UnityEvent<float> OnCurrentEnemyHealthChanged;
 
+    private const float _percentageMultiplier = 100f;
+
     private void Start()
     {
         InitializeEnemy(_saveLoadData.Index);
     }
-
-    //private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
-    //{
-    //    if (enemiesData.IsStatusIndexValid(index))
-    //    {
-    //        _currentEnemy = enemiesData.EnemiesDataList[index];
-    //        return true;
-    //    }
-    //    else
-    //        return false;
-    //}
 
     public void InitializeEnemy(int index)
     {
@@ -50,11 +42,26 @@ public class EnemyManager : MonoBehaviour
         else
             _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count)];
 
-        _currentEnemyHealth = _currentEnemy.Health;
+        _currentEnemyHealth = _currentEnemy.Health * (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier);
         _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyParent);
 
         OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
+    }
+
+    private void SwitchToNextStage()
+    {
+        _currentStage++;
+
+        if (_currentStage >= _currentEnemy.Stages.Count)
+        {
+            _currentStage = 0;
+            SwitchToNextEnemy();
+        }
+        else
+        {
+            _currentEnemyHealth = (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier) * _currentEnemy.Health;
+        }
     }
 
     private void SwitchToNextEnemy()
@@ -77,7 +84,7 @@ public class EnemyManager : MonoBehaviour
 
         if (_currentEnemyHealth <= 0f)
         {
-            SwitchToNextEnemy();
+            SwitchToNextStage();
         }
 
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);

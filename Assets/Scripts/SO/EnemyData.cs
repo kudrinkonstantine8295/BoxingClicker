@@ -14,7 +14,7 @@ public struct Stage
 {
     public AudioClip Clip;
     public Color Color;
-    public int HealthPercentage;
+    public float HealthPercentage;
 }
 
 [Serializable]
