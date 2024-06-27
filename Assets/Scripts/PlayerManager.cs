@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] private SaveLoadData _playerStats;
     [SerializeField] private EnemyManager _enemyManager;
 
     private float _damage;

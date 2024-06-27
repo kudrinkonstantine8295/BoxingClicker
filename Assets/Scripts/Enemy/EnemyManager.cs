@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemiesData _mainEnemiesData;
     [SerializeField] private EnemiesData _bonusEnemiesData;
     [SerializeField] private Transform _enemyParent;
-    [SerializeField] private PlayerStats _playerStats;
+    [SerializeField] private SaveLoadData _saveLoadData;
 
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
@@ -18,12 +18,12 @@ public class EnemyManager : MonoBehaviour
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
-    public UnityEvent<PlayerStats> OnPlayerStatsChanged;
+    public UnityEvent<SaveLoadData> OnPlayerStatsChanged;
     public UnityEvent<float> OnCurrentEnemyHealthChanged;
 
     private void Start()
     {
-        InitializeEnemy(_playerStats.Index);
+        InitializeEnemy(_saveLoadData.Index);
     }
 
     //private bool TryGetCurrentEnemy(EnemiesData enemiesData, int index)
@@ -42,15 +42,16 @@ public class EnemyManager : MonoBehaviour
         if (_enemyBody != null)
         {
             Destroy(_enemyBody);
+            _enemyBody = null;
         }
 
         if (index < _mainEnemiesData.EnemiesDataList.Count)
             _currentEnemy = _mainEnemiesData.EnemiesDataList[index];
         else
-            _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count - 1)];
+            _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count)];
 
         _currentEnemyHealth = _currentEnemy.Health;
-
+        _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyParent);
 
         OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
@@ -58,15 +59,16 @@ public class EnemyManager : MonoBehaviour
 
     private void SwitchToNextEnemy()
     {
-        _playerStats.Index++;
+        _saveLoadData.Index++;
 
-        if (_playerStats.Index >= _mainEnemiesData.EnemiesDataList.Count + _playerStats.GameCompletedTimes)
+        if (_saveLoadData.Index >= _mainEnemiesData.EnemiesDataList.Count + _saveLoadData.GameCompletedTimes)
         {
-            _playerStats.Index = 0;
+            _saveLoadData.Index = 0;
+            _saveLoadData.GameCompletedTimes += 1;
         }
 
-        InitializeEnemy(_playerStats.Index);
-        OnPlayerStatsChanged?.Invoke(_playerStats);
+        InitializeEnemy(_saveLoadData.Index);
+        OnPlayerStatsChanged?.Invoke(_saveLoadData);
     }
 
     public void MakeClickPunch(float damage)

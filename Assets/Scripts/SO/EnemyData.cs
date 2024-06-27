@@ -9,11 +9,12 @@ public enum EnemyStatuses
     Bonus
 }
 
+[Serializable]
 public struct Stage
 {
     public AudioClip Clip;
     public Color Color;
-    public uint HealthPercentage;
+    public int HealthPercentage;
 }
 
 [Serializable]
