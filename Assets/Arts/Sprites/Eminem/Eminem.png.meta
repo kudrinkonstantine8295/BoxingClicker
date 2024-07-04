@@ -1,0 +1,378 @@
+fileFormatVersion: 2
+guid: 4a43d88d33cc38344a1c0fd3081094f7
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Eminem_0
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 673
+        width: 430
+        height: 518
+      alignment: 9
+      pivot: {x: 0.49999985, y: 0.032495093}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88e1c799739e9aa46a59bf2c1efbb0d4
+      internalID: 922559376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_2
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 844
+        width: 172
+        height: 218
+      alignment: 9
+      pivot: {x: 0.41429812, y: 0.113613866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2805838ebe4e18041813b725de18b952
+      internalID: 454052193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_3
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 672
+        width: 385
+        height: 502
+      alignment: 9
+      pivot: {x: 0.46718243, y: 0.005010111}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ab7a5735b934034e9de8a021f2f93c7
+      internalID: 1811165411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_4
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 703
+        width: 383
+        height: 503
+      alignment: 9
+      pivot: {x: 0.46701074, y: 0.010180616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdee846a4df2b914db3b414640b12c06
+      internalID: 762048334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_5
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 949
+        width: 90
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ce9891b0785a2a41b608af317e365ad
+      internalID: -160563024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_8
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 590
+        width: 213
+        height: 150
+      alignment: 9
+      pivot: {x: 0.10454377, y: 0.8650057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb3218c29aa20c4f867b6c47610e819
+      internalID: 2000972946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_9
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 259
+        width: 360
+        height: 313
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 160754e004f345144aafb410215f7a88
+      internalID: -1372484581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_11
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 220
+        width: 405
+        height: 376
+      alignment: 9
+      pivot: {x: 0.5155983, y: -0.0040491796}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a47f87e98de1614283c7d50615c7977
+      internalID: -1071550659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_12
+      rect:
+        serializedVersion: 2
+        x: 1362
+        y: 146
+        width: 386
+        height: 504
+      alignment: 9
+      pivot: {x: 0.46726713, y: 0.0111523885}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d807e533e9dce9b4fb0194b9942a43f6
+      internalID: -495978451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_13
+      rect:
+        serializedVersion: 2
+        x: 1835
+        y: 143
+        width: 344
+        height: 510
+      alignment: 9
+      pivot: {x: 0.28574672, y: 0.012774508}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e02624a91fb5f5b4dbfbdd390bf7af41
+      internalID: 1187599838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eminem_18
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 195
+        width: 132
+        height: 303
+      alignment: 9
+      pivot: {x: 0.86692023, y: 0.9239406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2d84989da2dcc43a60c7b24b1ab3b2
+      internalID: 1299110923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Eminem_0: 922559376
+      Eminem_1: 459166557
+      Eminem_10: -1800191322
+      Eminem_11: -1071550659
+      Eminem_12: -495978451
+      Eminem_13: 1187599838
+      Eminem_14: -1370958251
+      Eminem_15: 948380380
+      Eminem_16: 1006260294
+      Eminem_17: -1876482566
+      Eminem_18: 1299110923
+      Eminem_19: -683177087
+      Eminem_2: 454052193
+      Eminem_3: 1811165411
+      Eminem_4: 762048334
+      Eminem_5: -160563024
+      Eminem_6: 535100728
+      Eminem_7: -1836150889
+      Eminem_8: 2000972946
+      Eminem_9: -1372484581
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

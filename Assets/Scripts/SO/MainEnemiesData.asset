@@ -13,18 +13,35 @@ MonoBehaviour:
   m_Name: MainEnemiesData
   m_EditorClassIdentifier: 
   <EnemiesDataList>k__BackingField:
-  - <Name>k__BackingField: 
-    <Health>k__BackingField: 0
+  - <Name>k__BackingField: name1
+    <Health>k__BackingField: 10
+    <MinDamage>k__BackingField: 15
+    <MaxDamage>k__BackingField: 17
+    <Money>k__BackingField: 1000
+    <Stages>k__BackingField:
+    - Clip: {fileID: 8300000, guid: e30ec4452dad1a740bfb23e691b81d52, type: 3}
+      Color: {r: 0.5188679, g: 0.24230151, b: 0.24230151, a: 1}
+      HealthPercentage: 100
+    - Clip: {fileID: 8300000, guid: aa7d451a0c959b54e88581ff1fe26e53, type: 3}
+      Color: {r: 0.7169812, g: 0.38892847, b: 0.38892847, a: 1}
+      HealthPercentage: 80
+    - Clip: {fileID: 8300000, guid: e30ec4452dad1a740bfb23e691b81d52, type: 3}
+      Color: {r: 0.8962264, g: 0.612985, b: 0.612985, a: 1}
+      HealthPercentage: 60
+    <_mainIcon>k__BackingField: {fileID: 21300000, guid: 061e13208b381f444aaaee0b9cb2f05b, type: 3}
+    <GameObject>k__BackingField: {fileID: 8879589983016603944, guid: fea70fe0796b22742a9abc4cb73ca394, type: 3}
+  - <Name>k__BackingField: name2
+    <Health>k__BackingField: 20
     <MinDamage>k__BackingField: 0
     <MaxDamage>k__BackingField: 0
-    <Money>k__BackingField: 0
-    <_mainIcon>k__BackingField: {fileID: 0}
-    <GameObject>k__BackingField: {fileID: 0}
-  - <Name>k__BackingField: dfgdfg
-    <Health>k__BackingField: 0
-    <MinDamage>k__BackingField: 0
-    <MaxDamage>k__BackingField: 0
-    <Money>k__BackingField: 0
-    <_mainIcon>k__BackingField: {fileID: 0}
-    <GameObject>k__BackingField: {fileID: 0}
+    <Money>k__BackingField: 1100
+    <Stages>k__BackingField:
+    - Clip: {fileID: 8300000, guid: aa7d451a0c959b54e88581ff1fe26e53, type: 3}
+      Color: {r: 0.30421248, g: 0.29587933, b: 0.5754717, a: 0}
+      HealthPercentage: 100
+    - Clip: {fileID: 8300000, guid: e30ec4452dad1a740bfb23e691b81d52, type: 3}
+      Color: {r: 0.10484158, g: 0.66600245, b: 0.7169812, a: 0}
+      HealthPercentage: 30
+    <_mainIcon>k__BackingField: {fileID: 21300000, guid: 2fec9e5c36c910d4eaba2d61bd126d6b, type: 3}
+    <GameObject>k__BackingField: {fileID: 5310909175416638636, guid: 27e7564752980c547987e56d4e14a1a7, type: 3}
   <EnemyStatus>k__BackingField: 0

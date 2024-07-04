@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemiesData _bonusEnemiesData;
     [SerializeField] private Transform _enemyParent;
     [SerializeField] private SaveLoadData _saveLoadData;
+    [SerializeField] private List<Collider> _enemyColliders;
 
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
@@ -88,6 +89,11 @@ public class EnemyManager : MonoBehaviour
         }
 
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
+    }
+
+   private void DisableEnemyColliders()
+    {
+
     }
 
 }

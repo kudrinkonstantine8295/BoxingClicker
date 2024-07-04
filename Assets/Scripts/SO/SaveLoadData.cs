@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Player Stats")]
+[CreateAssetMenu(fileName = "SaveLoadData")]
 [Serializable]
 public class SaveLoadData : ScriptableObject
 {

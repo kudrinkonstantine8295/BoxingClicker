@@ -8,7 +8,6 @@ public class ClickPunch : MonoBehaviour
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private PlayerManager _playerManager;
     [SerializeField] private GameObject _clickEffectPrefab;
-    //[SerializeField] private LevelManager _levelManager;
     [SerializeField] private Shaker _shaker;
 
     private void Update()
@@ -30,7 +29,6 @@ public class ClickPunch : MonoBehaviour
                         clickEffect.Setup(_playerManager.Damage);
 
                     _shaker.Shake();
-                    //_levelManager.AddClick();
                 }
             }
         }
