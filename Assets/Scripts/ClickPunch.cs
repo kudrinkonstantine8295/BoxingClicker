@@ -19,9 +19,9 @@ public class ClickPunch : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.GetComponent<ClickZone>())
+                if (hit.collider.TryGetComponent(out PunchZone punchZone))
                 {
-                    _playerManager.MakeClickPunch();
+                    _playerManager.MakePunch(punchZone);
                     GameObject newPrefab = ObjectPoolManager.SpawnObject(_clickEffectPrefab, hit.point, Quaternion.identity, ObjectPoolManager.PoolType.GameObject);
                     newPrefab.TryGetComponent(out ClickEffect clickEffect);
 

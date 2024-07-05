@@ -3,12 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyStatuses
-{
-    Main,
-    Bonus
-}
-
 [Serializable]
 public struct Stage
 {

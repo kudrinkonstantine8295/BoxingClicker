@@ -29,7 +29,7 @@ MonoBehaviour:
       Color: {r: 0.9339623, g: 0.44495374, b: 0.44495374, a: 1}
       HealthPercentage: 40
     <_mainIcon>k__BackingField: {fileID: 21300000, guid: a87cab062faf9014f9bf9504f2a056ce, type: 3}
-    <GameObject>k__BackingField: {fileID: 5243497529080547345, guid: fc2c7cd0b76c7c54a8163d70f0fa0758, type: 3}
+    <GameObject>k__BackingField: {fileID: 4297633896990471593, guid: b53218be5c08b954a8d6db3d39c204a4, type: 3}
   - <Name>k__BackingField: bonusname2
     <Health>k__BackingField: 60
     <MinDamage>k__BackingField: 0
@@ -43,5 +43,5 @@ MonoBehaviour:
       Color: {r: 0.10502803, g: 0.3301887, b: 0.08566217, a: 1}
       HealthPercentage: 70
     <_mainIcon>k__BackingField: {fileID: 21300000, guid: cf148aa36744e0741970a5c36f8008ab, type: 3}
-    <GameObject>k__BackingField: {fileID: 3263871340950569677, guid: fae6eb8d646642243817ef36af9a328d, type: 3}
+    <GameObject>k__BackingField: {fileID: 4297633896990471593, guid: b53218be5c08b954a8d6db3d39c204a4, type: 3}
   <EnemyStatus>k__BackingField: 0

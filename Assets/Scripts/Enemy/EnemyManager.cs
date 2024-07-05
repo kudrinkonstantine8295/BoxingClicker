@@ -12,11 +12,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform _enemyParent;
     [SerializeField] private SaveLoadData _saveLoadData;
     [SerializeField] private List<Collider> _enemyColliders;
+    [SerializeField] private List<Transform> _enemyPositions;
 
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
     private GameObject _enemyBody;
     private int _currentStage = 0;
+    private PunchZoneManager _punchZoneManager = new();
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
@@ -45,6 +47,11 @@ public class EnemyManager : MonoBehaviour
 
         _currentEnemyHealth = _currentEnemy.Health * (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier);
         _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyParent);
+
+        if (_enemyBody.TryGetComponent(out Enemy enemy))
+        {
+            enemy.Init(this);
+        }
 
         OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
@@ -79,9 +86,11 @@ public class EnemyManager : MonoBehaviour
         OnPlayerStatsChanged?.Invoke(_saveLoadData);
     }
 
-    public void MakeClickPunch(float damage)
+    public void TakePunch(PunchZone punchZone, SaveLoadData saveLoadData)
     {
-        _currentEnemyHealth -= damage;
+        var punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData);
+
+        _currentEnemyHealth -= punchData.Damage;
 
         if (_currentEnemyHealth <= 0f)
         {
@@ -91,7 +100,7 @@ public class EnemyManager : MonoBehaviour
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
     }
 
-   private void DisableEnemyColliders()
+    private void DisableEnemyColliders()
     {
 
     }

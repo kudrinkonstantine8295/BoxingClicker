@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e16b3433ff0994696b7162ccaaadb9, type: 3}
   m_Name: SaveLoadData
   m_EditorClassIdentifier: 
-  Damage: 1
+  MinDamage: 1
+  MaxDamage: 3
   Money: 0
   CritMultiplier: 1.2
+  CritChancePercentage: 10
+  UltraCritMultiplier: 1.5
+  UltraCritChancePercentage: 10
+  SamePunchZoneMaxPenulty: 0.3
   Heal: 1
   Health: 100
-  Index: 0
-  GameCompletedTimes: 2
+  Index: 1
+  GameCompletedTimes: 0

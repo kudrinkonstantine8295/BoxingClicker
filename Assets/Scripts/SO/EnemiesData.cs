@@ -10,10 +10,8 @@ public class EnemiesData : ScriptableObject
 {
     [field: SerializeField] public List<EnemyData> EnemiesDataList { get; private set; }
 
-    [field: SerializeField] public EnemyStatuses EnemyStatus { get; private set; }
-
-    public bool IsStatusIndexValid(/*EnemyStatusIndex enemyStatusindex*/ int index)
+    public bool IsStatusIndexValid(int index)
     {
-        return (/*enemyStatusindex.Status == EnemyStatus && */EnemiesDataList[/*enemyStatusindex.Index*/ index] != null);
+        return (EnemiesDataList[index] != null);
     }
 }
