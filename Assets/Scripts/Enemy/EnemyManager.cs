@@ -9,16 +9,15 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private EnemiesData _mainEnemiesData;
     [SerializeField] private EnemiesData _bonusEnemiesData;
-    [SerializeField] private Transform _enemyParent;
     [SerializeField] private SaveLoadData _saveLoadData;
-    [SerializeField] private List<Collider> _enemyColliders;
-    [SerializeField] private List<Transform> _enemyPositions;
+    [SerializeField] private EnemyMovement _enemyMovement;
 
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
     private GameObject _enemyBody;
     private int _currentStage = 0;
     private PunchZoneManager _punchZoneManager = new();
+    private bool _isEnemyChanged = false;
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
     public UnityEvent OnEnemyDied;
@@ -46,7 +45,7 @@ public class EnemyManager : MonoBehaviour
             _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count)];
 
         _currentEnemyHealth = _currentEnemy.Health * (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier);
-        _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyParent);
+        _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyMovement.transform);
 
         if (_enemyBody.TryGetComponent(out Enemy enemy))
         {
@@ -65,6 +64,7 @@ public class EnemyManager : MonoBehaviour
         {
             _currentStage = 0;
             SwitchToNextEnemy();
+            _isEnemyChanged = true;
         }
         else
         {
@@ -86,9 +86,14 @@ public class EnemyManager : MonoBehaviour
         OnPlayerStatsChanged?.Invoke(_saveLoadData);
     }
 
-    public void TakePunch(PunchZone punchZone, SaveLoadData saveLoadData)
+    public PunchData TakePunch(PunchZone punchZone, SaveLoadData saveLoadData)
     {
-        var punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData);
+        PunchData punchData;
+
+        if (_isEnemyChanged)
+            punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData, true);
+        else
+            punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData, false);
 
         _currentEnemyHealth -= punchData.Damage;
 
@@ -98,6 +103,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
+
+        return punchData;
     }
 
     private void DisableEnemyColliders()

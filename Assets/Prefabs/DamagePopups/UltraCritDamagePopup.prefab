@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7600560392184005499
 Transform:
   m_ObjectHideFlags: 0
@@ -4899,7 +4899,6 @@ GameObject:
   - component: {fileID: 7396275865845769113}
   - component: {fileID: 6729651291706385884}
   - component: {fileID: 1207385873980064356}
-  - component: {fileID: 6108109207445275959}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4923,8 +4922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.8288}
-  m_SizeDelta: {x: 3.8, y: 1.3425}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 3.47, y: 1.3425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6729651291706385884
 MeshRenderer:
@@ -4946,7 +4945,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3934f0b91ff576f429edd1d2e4b1e0ae, type: 2}
+  - {fileID: 2100000, guid: bce1b5ef161d08148808b2c0b8b45fde, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4966,7 +4965,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1207385873980064356
 MonoBehaviour:
@@ -4990,15 +4989,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: +1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1de7eaab2ffc0e24f8947e13f508c5a4, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 3934f0b91ff576f429edd1d2e4b1e0ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3435b848bbd46ba4b90ae34c1243925c, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: bce1b5ef161d08148808b2c0b8b45fde, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4284678170
+  m_fontColor: {r: 0.1037237, g: 0, b: 0.38679248, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5015,13 +5014,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5060,27 +5059,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6729651291706385884}
   m_maskType: 0
---- !u!95 &6108109207445275959
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4175707523578083768}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 941babfb00a6ba7499291bf424dae7a2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5084411214672206694
 GameObject:
   m_ObjectHideFlags: 0
@@ -5090,9 +5068,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9103039762961151974}
-  - component: {fileID: 762264017565771402}
+  - component: {fileID: 5244311086358180709}
   m_Layer: 0
-  m_Name: ClickEffect
+  m_Name: UltraCritDamagePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5115,7 +5093,7 @@ Transform:
   - {fileID: 7396275865845769113}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &762264017565771402
+--- !u!114 &5244311086358180709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5124,8 +5102,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 5084411214672206694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba2831031887ad4e94083c855308bb1, type: 3}
+  m_Script: {fileID: 11500000, guid: bfaff32824f77ad41baa467b3928a0bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1207385873980064356}
-  _deactivateSeconds: 5
+  _deactivateSeconds: 1.5
+  _alphaCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.0029509068
+      inSlope: 3.5756934
+      outSlope: 3.5756934
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.24322134
+      value: 0.87263584
+      inSlope: 1.623952
+      outSlope: 1.623952
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6096502
+      value: 0.7525244
+      inSlope: -1.9558076
+      outSlope: -1.9558076
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.79691446
+      value: 0.081401885
+      inSlope: -2.0640807
+      outSlope: -2.0640807
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9231189
+      value: 0.012704324
+      inSlope: -0.3355996
+      outSlope: -0.3355996
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.0029509068
+      inSlope: -0.12686363
+      outSlope: -0.12686363
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0125
+      value: 1.0165008
+      inSlope: 0.98915267
+      outSlope: 0.98915267
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.005825
+      value: 1.999051
+      inSlope: 0.98915267
+      outSlope: 0.98915267
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _minDistance: 2
+  _maxDistance: 3
+  _angleSpread: 100
+  _zonesAngle:
+  - ZoneType: 2
+    Angle: 105
+  - ZoneType: 1
+    Angle: 345
+  - ZoneType: 3
+    Angle: 225

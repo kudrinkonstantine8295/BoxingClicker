@@ -7,12 +7,15 @@ public class PunchZoneManager
 {
     private List<PunchZone> _punchZones = new();
 
-    public PunchData GetPunchData(PunchZone punchedZone, SaveLoadData saveLoadData)
+    public PunchData GetPunchData(PunchZone punchedZone, SaveLoadData saveLoadData, bool isPunchZonesRefreshNeeded)
     {
         bool isCritRestricted = false;
         PunchType punchType;
         float damage;
         int randomNumber;
+
+        if(isPunchZonesRefreshNeeded)
+            _punchZones.Clear();
 
         PunchZone punchZone;
 
@@ -21,12 +24,11 @@ public class PunchZoneManager
             punchZone = _punchZones.FirstOrDefault(z => z == punchedZone);
 
             if (punchZone == null)
-                _punchZones.Add(punchZone);
+                _punchZones.Add(punchedZone);
         }
         else
         {
             _punchZones.Add(punchedZone);
-
         }
 
         var biggestDamageZone = _punchZones.OrderByDescending(z => z.DamageTaken).First();
@@ -56,8 +58,7 @@ public class PunchZoneManager
         if (isCritRestricted)
             punchType |= PunchType.Usual;
 
-        PunchData punchData = new PunchData(damage, punchType);
-
+        PunchData punchData = new PunchData(damage, punchType, punchedZone.ZoneType);
         punchedZone.AddTakenDamage(damage);
 
         return punchData;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c2641f0c5a78fb948aea3bd9dbc96bde
+guid: bc93e1d69e2a5ac45a3477650e1f4cc3
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Amatic SC
+  - Neucha
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

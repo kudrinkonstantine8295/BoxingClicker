@@ -24,17 +24,17 @@ public class ShopButton : MonoBehaviour
     [SerializeField] private TMP_Text _priceText;
     [SerializeField] private Button _button;
     [SerializeField] private Image _image;
-    [SerializeField] private Progress _progress;
+    //[SerializeField] private Progress _progress;
 
     private void Awake()
     {
-        _progress.OnCoinsChanged += UpdateButton;
+        //_progress.OnCoinsChanged += UpdateButton;
 
     }
 
     private void OnDisable()
     {
-        _progress.OnCoinsChanged -= UpdateButton;  
+        //_progress.OnCoinsChanged -= UpdateButton;  
         _button.onClick.RemoveListener(Buy);
     }
 
@@ -76,12 +76,12 @@ public class ShopButton : MonoBehaviour
     {
         if (_incomeOption == IncomeOption.PerClick)
         {
-            _progress.AddCoinsPerClick(_income, _price);
+            //_progress.AddCoinsPerClick(_income, _price);
             
         }
         else
         {
-            _progress.AddCoinsPerSecond(_income, _price);
+            //_progress.AddCoinsPerSecond(_income, _price);
         }
     }
 }

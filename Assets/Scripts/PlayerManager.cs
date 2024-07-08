@@ -8,14 +8,15 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private SaveLoadData _playerStats;
     [SerializeField] private EnemyManager _enemyManager;
 
+
     private float _minDamage;
     private float _maxDamage;
     private float _money;
     private float _critMultiplier;
     private float _heal;
     private float _health;
-    private int _index = 0;
-    private int _gameCompletedTimes = 0;
+    //private int _index = 0;
+    //private int _gameCompletedTimes = 0;
 
     public float Damage => _minDamage;
 
@@ -31,9 +32,9 @@ public class PlayerManager : MonoBehaviour
         _health = _playerStats.Health;
     }
 
-    public void MakePunch(PunchZone punchZone)
+    public PunchData MakePunch(PunchZone punchZone)
     {
-        _enemyManager.TakePunch(punchZone, _playerStats);
+        return _enemyManager.TakePunch(punchZone, _playerStats);
     }
 
     private void IncreaseCritMultiplier(float critMultiplier, float money)
