@@ -22,5 +22,5 @@ MonoBehaviour:
   SamePunchZoneMaxPenulty: 0.3
   Heal: 1
   Health: 100
-  Index: 2
-  GameCompletedTimes: 1
+  Index: 3
+  GameCompletedTimes: 2

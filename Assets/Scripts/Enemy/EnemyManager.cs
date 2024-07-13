@@ -12,9 +12,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private SaveLoadData _saveLoadData;
     [SerializeField] private EnemyMovement _enemyMovement;
 
+
     private EnemyData _currentEnemy;
     private float _currentEnemyHealth = 0f;
-    private GameObject _enemyBody;
+    private Enemy _enemyBody;
     private int _currentStage = 0;
     private PunchZoneManager _punchZoneManager = new();
     private bool _isEnemyChanged = false;
@@ -33,9 +34,11 @@ public class EnemyManager : MonoBehaviour
 
     public void InitializeEnemy(int index)
     {
+        GameObject enemyGameObject;
+
         if (_enemyBody != null)
         {
-            Destroy(_enemyBody);
+            Destroy(_enemyBody.gameObject);
             _enemyBody = null;
         }
 
@@ -44,35 +47,38 @@ public class EnemyManager : MonoBehaviour
         else
             _currentEnemy = _bonusEnemiesData.EnemiesDataList[index - (_mainEnemiesData.EnemiesDataList.Count)];
 
-        _currentEnemyHealth = _currentEnemy.Health * (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier);
-        _enemyBody = Instantiate(_currentEnemy.GameObject, _enemyMovement.transform);
+        _currentEnemyHealth = Mathf.Round(_currentEnemy.Health * (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier));
+        enemyGameObject = Instantiate(_currentEnemy.GameObject, _enemyMovement.transform);
 
-        if (_enemyBody.TryGetComponent(out Enemy enemy))
+        if (enemyGameObject.TryGetComponent(out Enemy enemy))
         {
-            enemy.Init(this);
+            _enemyBody = enemy;
+            _enemyBody.Init(this);
         }
 
         OnCurrentEnemyUpdated?.Invoke(_currentEnemy);
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
     }
 
-    private void SwitchToNextStage()
+    private bool TrySwitchToNextStage()
     {
+        bool isNextStageExist = false;
         _currentStage++;
 
         if (_currentStage >= _currentEnemy.Stages.Count)
         {
             _currentStage = 0;
-            SwitchToNextEnemy();
-            _isEnemyChanged = true;
         }
         else
         {
-            _currentEnemyHealth = (_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier) * _currentEnemy.Health;
+            _currentEnemyHealth = Mathf.Round((_currentEnemy.Stages[_currentStage].HealthPercentage / _percentageMultiplier) * _currentEnemy.Health);
+            isNextStageExist = true;
         }
+
+        return isNextStageExist;
     }
 
-    private void SwitchToNextEnemy()
+    public void SwitchToNextEnemy()
     {
         _saveLoadData.Index++;
 
@@ -82,6 +88,7 @@ public class EnemyManager : MonoBehaviour
             _saveLoadData.GameCompletedTimes += 1;
         }
 
+        _isEnemyChanged = true;
         InitializeEnemy(_saveLoadData.Index);
         OnPlayerStatsChanged?.Invoke(_saveLoadData);
     }
@@ -95,11 +102,21 @@ public class EnemyManager : MonoBehaviour
         else
             punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData, false);
 
+        _isEnemyChanged = false;
         _currentEnemyHealth -= punchData.Damage;
 
-        if (_currentEnemyHealth <= 0f)
+        if (_currentEnemyHealth <= 0)
         {
-            SwitchToNextStage();
+            _currentEnemyHealth = 0;
+
+            if (TrySwitchToNextStage())
+                _enemyBody.PlayKnockDown();
+            else
+                _enemyBody.PlayDefeat();
+        }
+        else
+        {
+            _enemyBody.PlayPunchTakenAnimation(punchZone);
         }
 
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);

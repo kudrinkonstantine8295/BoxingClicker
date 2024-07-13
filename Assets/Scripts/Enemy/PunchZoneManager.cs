@@ -19,16 +19,16 @@ public class PunchZoneManager
 
         PunchZone punchZone;
 
-        if (_punchZones.Count > 0)
+        if (_punchZones.Count == 0)
+        {
+            _punchZones.Add(punchedZone);
+        }
+        else
         {
             punchZone = _punchZones.FirstOrDefault(z => z == punchedZone);
 
             if (punchZone == null)
                 _punchZones.Add(punchedZone);
-        }
-        else
-        {
-            _punchZones.Add(punchedZone);
         }
 
         var biggestDamageZone = _punchZones.OrderByDescending(z => z.DamageTaken).First();
@@ -50,16 +50,17 @@ public class PunchZoneManager
 
             if (randomNumber < saveLoadData.UltraCritChancePercentage)
             {
-                damage *= damage *= saveLoadData.UltraCritMultiplier;
+                damage *= saveLoadData.UltraCritMultiplier;
                 punchType = PunchType.UltraCrit;
             }
         }
 
-        if (isCritRestricted)
-            punchType |= PunchType.Usual;
+        //if (isCritRestricted)
+        //    punchType = PunchType.Usual;
 
-        PunchData punchData = new PunchData(damage, punchType, punchedZone.ZoneType);
-        punchedZone.AddTakenDamage(damage);
+        float roundedDamage = Mathf.Round(damage);
+        punchedZone.AddTakenDamage(roundedDamage);
+        PunchData punchData = new PunchData(roundedDamage, punchType, punchedZone.ZoneType);
 
         return punchData;
     }

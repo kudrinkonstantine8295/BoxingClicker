@@ -5,9 +5,8 @@ using UnityEngine;
 public enum ZoneType
 {
     None,
-    Left,
-    Right,
-    Bottom
+    Top,
+    Bottom,
 }
 
 public class PunchZone : MonoBehaviour
