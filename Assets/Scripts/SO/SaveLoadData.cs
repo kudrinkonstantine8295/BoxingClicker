@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public class SaveLoadData : ScriptableObject
 {
+    [field: SerializeField] public string Name = "Player1";
     [field: SerializeField] public float MinDamage = 1f;
     [field: SerializeField] public float MaxDamage = 3f;
     [field: SerializeField] public float Money = 0f;

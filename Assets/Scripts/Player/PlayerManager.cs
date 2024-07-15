@@ -5,56 +5,97 @@ using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private SaveLoadData _playerStats;
+    [SerializeField] private SaveLoadData _saveLoadStats;
     [SerializeField] private EnemyManager _enemyManager;
+    [SerializeField] private PlayerUI _playerUI;
+    [SerializeField] private PlayerHealZoneController _playerHealZoneController;
+    [SerializeField] private EvasionZonesController _evasionZonesController;
 
+    private float _currentHealth = 0f;
+    private string _currentName;
 
-    private float _minDamage;
-    private float _maxDamage;
-    private float _money;
-    private float _critMultiplier;
-    private float _heal;
-    private float _health;
-    //private int _index = 0;
-    //private int _gameCompletedTimes = 0;
+    public UnityEvent<float, float> OnPlayerHealthChanged;
+    public UnityEvent<string> OnNameChanged;
 
-    public float Damage => _minDamage;
-
-    public UnityEvent<float> OnPlayerHealthChanged;
-
-    private void Start()
+    private void OnEnable()
     {
-        _minDamage = _playerStats.MinDamage;
-        _maxDamage = _playerStats.MaxDamage;
-        _money = _playerStats.Money;
-        _critMultiplier = _playerStats.CritMultiplier;
-        _heal = _playerStats.Heal;
-        _health = _playerStats.Health;
+        _enemyManager.OnCurrentEnemyUpdated.AddListener(RestoreHealth);
+        _enemyManager.OnCurrentEnemyUpdated.AddListener(UpdateName);
+    }
+
+    private void OnDisable()
+    {
+        _enemyManager.OnCurrentEnemyUpdated.RemoveListener(RestoreHealth);
+        _enemyManager.OnCurrentEnemyUpdated.RemoveListener(UpdateName);
     }
 
     public PunchData MakePunch(PunchZone punchZone)
     {
-
-        return _enemyManager.TakePunch(punchZone, _playerStats);
+        return _enemyManager.TakePunch(punchZone, _saveLoadStats);
     }
 
-    private void IncreaseCritMultiplier(float critMultiplier, float money)
+    public void TakePunch(EvasionZoneType evasionType, List<PlayerEvasionZone> playerEvasionZones)
     {
-        _critMultiplier += critMultiplier;
-        _money -= money;
+        var enemyAttackInfo = _enemyManager.AttackPlayer(playerEvasionZones);
+
+        if (enemyAttackInfo.Zone == evasionType)
+        {
+            _currentHealth -= enemyAttackInfo.Damage;
+
+            if (_currentHealth < 0f)
+            {     
+                _currentHealth = 0f;
+                _playerHealZoneController.StartHealing();
+            }
+
+            OnPlayerHealthChanged?.Invoke(_currentHealth, _saveLoadStats.Health);
+        }
     }
 
-    private void IncreaseKnockdownHeal(float knockdownHeal, float money)
+    public void ActivateHeal()
     {
-        _playerStats.Heal += knockdownHeal;
-        _money -= money;
+        if (_currentHealth < _saveLoadStats.Health)
+        {
+            _currentHealth += _saveLoadStats.Heal;
+
+            if (_currentHealth > _saveLoadStats.Health)
+                _currentHealth = _saveLoadStats.Health;
+
+            OnPlayerHealthChanged?.Invoke(_currentHealth, _saveLoadStats.Health);
+        }
     }
 
-    private void IncreaseHealth(float health, float money)
+
+
+    private void RestoreHealth(EnemyData enemyData)
     {
-        _playerStats.Heal += health;
-        _money -= money;
+        _currentHealth = _saveLoadStats.Health;
+        OnPlayerHealthChanged?.Invoke(_currentHealth, _saveLoadStats.Health);
     }
+
+    private void UpdateName(EnemyData enemyData)
+    {
+        _currentName = _saveLoadStats.Name;
+        OnNameChanged?.Invoke(_currentName);
+    }
+
+    //private void IncreaseCritMultiplier(float critMultiplier, float money)
+    //{
+    //    _critMultiplier += critMultiplier;
+    //    _money -= money;
+    //}
+
+    //private void IncreaseKnockdownHeal(float knockdownHeal, float money)
+    //{
+    //    _saveLoadStats.Heal += knockdownHeal;
+    //    _money -= money;
+    //}
+
+    //private void IncreaseHealth(float health, float money)
+    //{
+    //    _saveLoadStats.Heal += health;
+    //    _money -= money;
+    //}
 
 
 }

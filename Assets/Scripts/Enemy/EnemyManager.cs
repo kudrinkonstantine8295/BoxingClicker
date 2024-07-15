@@ -21,8 +21,8 @@ public class EnemyManager : MonoBehaviour
     private bool _isEnemyChanged = false;
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
-    public UnityEvent OnEnemyDied;
-    public UnityEvent<SaveLoadData> OnPlayerStatsChanged;
+    //public UnityEvent OnEnemyDied;
+    public UnityEvent<SaveLoadData> OnSaveLoadStatsChanged;
     public UnityEvent<float> OnCurrentEnemyHealthChanged;
 
     private const float _percentageMultiplier = 100f;
@@ -90,7 +90,7 @@ public class EnemyManager : MonoBehaviour
 
         _isEnemyChanged = true;
         InitializeEnemy(_saveLoadData.Index);
-        OnPlayerStatsChanged?.Invoke(_saveLoadData);
+        OnSaveLoadStatsChanged?.Invoke(_saveLoadData);
     }
 
     public PunchData TakePunch(PunchZone punchZone, SaveLoadData saveLoadData)
@@ -122,6 +122,13 @@ public class EnemyManager : MonoBehaviour
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
 
         return punchData;
+    }
+
+    public EnemyAttackInfo AttackPlayer(List<PlayerEvasionZone> playerEvasionZones)
+    {
+        var evasionChoise = playerEvasionZones[UnityEngine.Random.Range(0, playerEvasionZones.Count)];
+        
+        return new EnemyAttackInfo(UnityEngine.Random.Range(_currentEnemy.MinDamage, _currentEnemy.MinDamage), evasionChoise.EvasionZoneType);
     }
 
     private void DisableEnemyColliders()

@@ -37,11 +37,12 @@ public class Enemy : MonoBehaviour
                 _animator.Play("RightPunchTaken");
         }
         else if (punchZone.ZoneType == ZoneType.Bottom)
+        {
             if (Random.Range(0, 2) == 0)
                 _animator.Play("BellyPunchTaken");
             else
                 _animator.Play("BellyPunchTaken2");
-
+        }
     }
 
     public void CallNextEnemy()

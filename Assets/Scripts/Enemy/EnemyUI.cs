@@ -5,12 +5,10 @@ using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyHealthBar : MonoBehaviour
+public class EnemyUI : MonoBehaviour
 {
-    [SerializeField] private Slider _healthSlider1;
-    [SerializeField] private Slider _healthSlider2;
-    [SerializeField] private Slider _smoothSlider1;
-    [SerializeField] private Slider _smoothSlider2;
+    [SerializeField] private HealthBarSlider _healthBarSliderLeft;
+    [SerializeField] private HealthBarSlider _HealthBarSliderRight;
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private TMP_Text _currentHP;
     [SerializeField] private TMP_Text _name;
@@ -18,10 +16,8 @@ public class EnemyHealthBar : MonoBehaviour
     [SerializeField] private float _zeroHPAlpha = 0.7f;
     [SerializeField] private Shaker _shaker;
     [SerializeField] private Scaler _scaler;
-    [SerializeField] private float _smoothSpeed;
 
     private float _currentEnemyMaxHealth = 0f;
-    private float _currentHealthSLider = 0f;
 
     private void OnEnable()
     {
@@ -46,9 +42,8 @@ public class EnemyHealthBar : MonoBehaviour
     {
         _shaker.StartShaking();
         _scaler.StartScaling();
-        _currentHealthSLider = health / _currentEnemyMaxHealth;
-        _healthSlider1.value = _currentHealthSLider;
-        _healthSlider2.value = _currentHealthSLider;
+        _healthBarSliderLeft.ChangeHealthSliderPosition(health, _currentEnemyMaxHealth);
+        _HealthBarSliderRight.ChangeHealthSliderPosition(health, _currentEnemyMaxHealth);
         _currentHP.text = health.ToString();
 
         if (health <= 0)
@@ -61,25 +56,5 @@ public class EnemyHealthBar : MonoBehaviour
     private void UpdateName(EnemyData enemyData)
     {
         _name.text = enemyData.Name;
-    }
-
-    private void TrySmoothSliderHealthBar()
-    {
-        if (_smoothSlider1.value != _currentHealthSLider)
-        {
-            if (_smoothSlider1.value < _currentHealthSLider)
-                _smoothSlider1.value = _currentHealthSLider;
-            else
-            {
-                _smoothSlider1.value = Mathf.MoveTowards(_smoothSlider1.value, _currentHealthSLider, Time.deltaTime * _smoothSpeed);
-                _smoothSlider2.value = Mathf.Lerp(_smoothSlider1.value, _currentHealthSLider, Time.deltaTime * _smoothSpeed);
-            }
-
-        }
-    }
-
-    private void Update()
-    {
-        TrySmoothSliderHealthBar();
     }
 }
