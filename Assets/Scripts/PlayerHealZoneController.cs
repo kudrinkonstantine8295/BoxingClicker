@@ -6,17 +6,13 @@ using UnityEngine.UI;
 public class PlayerHealZoneController : MonoBehaviour
 {
     [SerializeField] PlayerManager _playerManager;
+    [SerializeField] EnemyManager _enemyManager;
+    [SerializeField] EmergencyLight _emergencyLight;
     [SerializeField] private Transform _switcher;
     [SerializeField] private float _healTime;
     [SerializeField] private Button _healButton;
 
     private float _timer = 0f;
-    private float _heal = 0f;
-
-    private void Start()
-    {
-        TurnOff();
-    }
 
     private void OnEnable()
     {
@@ -28,6 +24,11 @@ public class PlayerHealZoneController : MonoBehaviour
         _healButton.onClick.RemoveListener(Heal);
     }
 
+    private void Start()
+    {
+        TurnOff();
+    }
+
     public void StartHealing()
     {
         _timer = _healTime;
@@ -37,11 +38,15 @@ public class PlayerHealZoneController : MonoBehaviour
     private void TurnOn()
     {
         _switcher.gameObject.SetActive(true);
+        _enemyManager.ChangeInteractionStatus(false);
+        _emergencyLight.Stop();
     }
 
-    private void TurnOff()
+    public void TurnOff()
     {
         _switcher.gameObject.SetActive(false);
+        _enemyManager.ChangeInteractionStatus(true);
+        _emergencyLight.Resume();
     }
 
     public void Heal()
@@ -49,7 +54,7 @@ public class PlayerHealZoneController : MonoBehaviour
         _playerManager.ActivateHeal();
     }
 
-    private void Update()
+    public void UpdateTimer()
     {
         if (_timer > 0f)
         {
@@ -61,5 +66,10 @@ public class PlayerHealZoneController : MonoBehaviour
                 TurnOff();
             }
         }
+    }
+
+    private void Update()
+    {
+        UpdateTimer();
     }
 }

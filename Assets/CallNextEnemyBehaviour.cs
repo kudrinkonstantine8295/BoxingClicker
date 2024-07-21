@@ -7,7 +7,7 @@ public class DefeatBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (animator.TryGetComponent(out Enemy enemy))
-            enemy.ChangeCollidersInteractionStatus(false);
+            enemy.ChangeInteractionStatus(false);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -11,25 +11,27 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemiesData _bonusEnemiesData;
     [SerializeField] private SaveLoadData _saveLoadData;
     [SerializeField] private EnemyMovement _enemyMovement;
-
+    [SerializeField] private EmergencyLight _emergencyLight;
 
     private EnemyData _currentEnemy;
-    private float _currentEnemyHealth = 0f;
-    private Enemy _enemyBody;
-    private int _currentStage = 0;
     private PunchZoneManager _punchZoneManager = new();
+    private Enemy _enemyBody;
+    private float _currentEnemyHealth = 0f;
+    private int _currentStage = 0;
     private bool _isEnemyChanged = false;
+    private Direction _attackDirection;
 
     public UnityEvent<EnemyData> OnCurrentEnemyUpdated;
-    //public UnityEvent OnEnemyDied;
     public UnityEvent<SaveLoadData> OnSaveLoadStatsChanged;
     public UnityEvent<float> OnCurrentEnemyHealthChanged;
+    public UnityEvent OnEnemyPunched;
 
     private const float _percentageMultiplier = 100f;
 
     private void Start()
     {
         InitializeEnemy(_saveLoadData.Index);
+        _emergencyLight.InitializeNewLight(_saveLoadData.EmergencyLightField);
     }
 
     public void InitializeEnemy(int index)
@@ -93,7 +95,7 @@ public class EnemyManager : MonoBehaviour
         OnSaveLoadStatsChanged?.Invoke(_saveLoadData);
     }
 
-    public PunchData TakePunch(PunchZone punchZone, SaveLoadData saveLoadData)
+    public PunchData TakePunch(PunchZone punchZone, SaveLoadData saveLoadData, float damageBonusMultiplier)
     {
         PunchData punchData;
 
@@ -103,7 +105,7 @@ public class EnemyManager : MonoBehaviour
             punchData = _punchZoneManager.GetPunchData(punchZone, saveLoadData, false);
 
         _isEnemyChanged = false;
-        _currentEnemyHealth -= punchData.Damage;
+        _currentEnemyHealth -= Mathf.Round(punchData.Damage * damageBonusMultiplier);
 
         if (_currentEnemyHealth <= 0)
         {
@@ -119,21 +121,61 @@ public class EnemyManager : MonoBehaviour
             _enemyBody.PlayPunchTakenAnimation(punchZone);
         }
 
+        _emergencyLight.SelectPosition(); ///Test
+
         OnCurrentEnemyHealthChanged?.Invoke(_currentEnemyHealth);
 
         return punchData;
     }
 
-    public EnemyAttackInfo AttackPlayer(List<PlayerEvasionZone> playerEvasionZones)
+    public void PlayPrepareAttackAnimation()
     {
-        var evasionChoise = playerEvasionZones[UnityEngine.Random.Range(0, playerEvasionZones.Count)];
-        
-        return new EnemyAttackInfo(UnityEngine.Random.Range(_currentEnemy.MinDamage, _currentEnemy.MinDamage), evasionChoise.EvasionZoneType);
+        _enemyBody.PlayPrepareAttackAnimation();
+        _enemyMovement.KeepDirection(Direction.Middle);
     }
 
-    private void DisableEnemyColliders()
+    public void Attack(List<PlayerEvasionZone> playerEvasionZones)
     {
+        _attackDirection = playerEvasionZones[UnityEngine.Random.Range(0, playerEvasionZones.Count)].Direction;
 
+        StartCoroutine(AttackCoroutine(_attackDirection));
     }
 
+    public void Attack()
+    {
+        _attackDirection = Direction.Middle;
+        StartCoroutine(AttackCoroutine(Direction.Middle));
+    }
+
+    public void ResumeChangePosition()
+    {
+        _enemyMovement.ResumeRandomChangePosition();
+    }
+
+    public IEnumerator AttackCoroutine(Direction direction)
+    {
+        _enemyMovement.KeepDirection(direction);
+
+        while (_enemyMovement.CheckEnemyCloseToTarget() == false)
+        {
+            yield return null;
+        }
+
+        _enemyBody.PlayAttackAnimation();
+    }
+
+    public EnemyAttackInfo AttackPlayer()
+    {
+        _emergencyLight.InitializeNewLight(_saveLoadData.EmergencyLightField);
+
+        return new EnemyAttackInfo(UnityEngine.Random.Range(_currentEnemy.MinDamage, _currentEnemy.MinDamage), _attackDirection);
+    }
+
+    public void ChangeInteractionStatus(bool isActivate)
+    {
+        if (_enemyBody != null)
+        {
+            _enemyBody.ChangeInteractionStatus(isActivate);
+        }
+    }
 }

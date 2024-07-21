@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum EvasionZoneType
+public enum Direction
 {
-    Left,
     Middle,
+    Left,
     Right,
 }
 
 public class PlayerEvasionZone : MonoBehaviour
 {
-    [SerializeField] private EvasionZoneType _evasionZoneType;
+    [SerializeField] private Direction _direction;
     [SerializeField] private Button _button;
     [SerializeField] private EvasionZonesController _evasionZonesController;
 
-    public EvasionZoneType EvasionZoneType => _evasionZoneType;
+    public Direction Direction => _direction;
 
     private void OnEnable()
     {
@@ -30,6 +30,6 @@ public class PlayerEvasionZone : MonoBehaviour
 
     public void Select()
     {
-        _evasionZonesController.SetEvasionZone(_evasionZoneType);
+        _evasionZonesController.SetDirection(_direction);
     }
 }

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         _enemyManager = enemyManager;
     }
 
-    public void ChangeCollidersInteractionStatus(bool isEnable)
+    public void ChangeInteractionStatus(bool isEnable)
     {
         foreach (var collider in _colliders)
         {
@@ -50,6 +50,12 @@ public class Enemy : MonoBehaviour
         _enemyManager.SwitchToNextEnemy();
     }
 
+    public void CallPunchReaction()
+    {
+        _enemyManager.ResumeChangePosition();
+        _enemyManager.OnEnemyPunched?.Invoke();
+    }
+
     public void PlayDefeat()
     {
         _animator.Play("Defeat");
@@ -58,5 +64,15 @@ public class Enemy : MonoBehaviour
     public void PlayKnockDown()
     {
         _animator.Play("KnockDown");
+    }
+
+    public void PlayPrepareAttackAnimation()
+    {
+        _animator.Play("PrepareAttack");
+    }
+
+    public void PlayAttackAnimation()
+    {
+        _animator.Play("Punch");
     }
 }

@@ -13,13 +13,27 @@ public class PunchZone : MonoBehaviour
 {
     [SerializeField] private ZoneType _zoneType;
 
-    private float _damageTaken = 0f;
+    private float _points = 0f;
 
-    public float DamageTaken => _damageTaken;
+    public float Points => _points;
     public ZoneType ZoneType => _zoneType;
 
-    public void AddTakenDamage(float damageTaken)
+    public PunchZone(ZoneType zoneType, float points)
     {
-        _damageTaken += damageTaken;
+        _zoneType = zoneType;
+        _points = points;
+    }
+
+    public void RemovePoints(float points)
+    {
+        _points -= points;
+
+        if (_points < 0f)
+            _points = 0f;
+    }
+
+    public void AddPoints(float Points)
+    {
+        _points += Points;
     }
 }

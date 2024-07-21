@@ -19,7 +19,7 @@ public class PlayerPunch : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent(out PunchZone punchZone))
                 {
-                    var punchData = _playerManager.MakePunch(punchZone);
+                    var punchData = _playerManager.AttackEnemy(punchZone);
                     _damagePopupController.CreateDamagePopup(hit, punchData);
                 }
             }

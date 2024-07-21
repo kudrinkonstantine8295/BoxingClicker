@@ -20,5 +20,6 @@ public class SaveLoadData : ScriptableObject
     [field: SerializeField] public float Health = 100f;
     [field: SerializeField] public int Index = 0;
     [field: SerializeField] public int GameCompletedTimes = 0;
+    [field: SerializeField] public float EmergencyLightField = 0.5f;
 
 }
